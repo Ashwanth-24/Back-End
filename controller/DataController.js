@@ -130,4 +130,25 @@ const Userbcrypt = async (req,res) =>{
 };
 
 
-module.exports = {addNew, viewNew, viewById, viewByName, Update, Delete, Userbcrypt};
+const UserCompare = async(req,res)=>{
+    try{
+        const {email, password} = req.body;
+        const user = await Datas.findOne({email});
+        
+        const isMatch = await  bcrypt.compare(password,user.password);
+        if(!isMatch) return res.status(404).json({msg:"password is not match"});
+
+        res.status(200).json({msg:"Login Successfull",
+            data:isMatch
+        })
+    }
+    catch(err){
+        res.status(404).json({mes:"Login Fail...!",
+            data:err
+        });
+    }
+
+}
+
+module.exports = {addNew, viewNew, viewById, viewByName, Update, Delete, Userbcrypt, UserCompare};
+  

@@ -10,7 +10,8 @@ router.get('/viewById/:id', DataController.viewById);
 router.get('/viewByName/:name', DataController.viewByName);
 router.put('/userupdate/:id', DataController.Update);
 router.delete('/userdelete/:id', DataController.Delete);
-router.post('/userbcrypt', Validator.userValidation, DataController.Userbcrypt);
+router.post('/userregister', Validator.userValidation, DataController.Userbcrypt);
+router.post('/userlogin', DataController.UserCompare);
 
 
 
